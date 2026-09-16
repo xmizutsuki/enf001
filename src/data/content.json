@@ -1,0 +1,189 @@
+{
+  "contentVersion": "1.0.0",
+  "units": [
+    {
+      "id": "basics",
+      "title": "Medical English Foundations",
+      "subtitle": "Build your clinical vocabulary",
+      "icon": "languages",
+      "lessons": [
+        { "id": "basics-1", "title": "Body & symptoms", "xp": 10, "type": "vocabulary" },
+        { "id": "basics-2", "title": "Pain vocabulary", "xp": 12, "type": "vocabulary" },
+        { "id": "basics-3", "title": "Vital signs", "xp": 12, "type": "reading" }
+      ]
+    },
+    {
+      "id": "assessment",
+      "title": "Patient Assessment",
+      "subtitle": "History + physical examination",
+      "icon": "stethoscope",
+      "lessons": [
+        { "id": "assessment-1", "title": "Chief complaint", "xp": 15, "type": "interview" },
+        { "id": "assessment-2", "title": "OPQRST interview", "xp": 15, "type": "interview" },
+        { "id": "assessment-3", "title": "Respiratory exam", "xp": 18, "type": "clinical" },
+        { "id": "assessment-4", "title": "Cardiovascular exam", "xp": 18, "type": "clinical" }
+      ]
+    },
+    {
+      "id": "documentation",
+      "title": "Clinical Documentation",
+      "subtitle": "Turn findings into professional notes",
+      "icon": "penline",
+      "lessons": [
+        { "id": "documentation-1", "title": "Objective charting", "xp": 20, "type": "writing" },
+        { "id": "documentation-2", "title": "Nursing progress note", "xp": 25, "type": "writing" },
+        { "id": "documentation-3", "title": "SBAR essentials", "xp": 20, "type": "speaking" }
+      ]
+    },
+    {
+      "id": "simulation",
+      "title": "Clinical Simulation",
+      "subtitle": "Integrate communication and documentation",
+      "icon": "heartpulse",
+      "lessons": [
+        { "id": "simulation-1", "title": "Post-op patient", "xp": 30, "type": "simulation" },
+        { "id": "simulation-2", "title": "Respiratory deterioration", "xp": 35, "type": "simulation" }
+      ]
+    }
+  ],
+  "lessonBank": {
+    "vocabulary": [
+      {
+        "prompt": "The patient has visible enlargement of the left ankle. Which term is most appropriate?",
+        "options": ["Swelling", "Wheezing", "Dizziness", "Bleeding"],
+        "answer": "Swelling",
+        "tip": "Swelling describes enlargement caused by fluid accumulation, inflammation, or injury."
+      },
+      {
+        "prompt": "Choose the most professional sentence.",
+        "options": ["The patient says he is bad.", "The patient reports severe abdominal pain.", "The patient has a bad belly.", "The patient is very not good."],
+        "answer": "The patient reports severe abdominal pain.",
+        "tip": "Clinical English favors specific, objective and measurable descriptions."
+      },
+      {
+        "prompt": "Lightheadedness most closely means:",
+        "options": ["Feeling faint", "Chest tightness", "Joint swelling", "Productive cough"],
+        "answer": "Feeling faint",
+        "tip": "Lightheadedness is a feeling of faintness; vertigo usually implies a spinning sensation."
+      }
+    ],
+    "reading": [
+      {
+        "prompt": "Read: ‘Surgical dressing clean, dry and intact. Patient ambulating with assistance.’ What is being described?",
+        "options": ["The incision dressing and mobility", "The patient’s diet", "The medication list", "The laboratory values"],
+        "answer": "The incision dressing and mobility",
+        "tip": "Clean, dry and intact is commonly used to describe a dressing or incision status."
+      },
+      {
+        "prompt": "Read: ‘Patient denies chest pain but reports dyspnea on exertion.’ Which statement is correct?",
+        "options": ["Chest pain is present", "Dyspnea occurs with activity", "The patient is unconscious", "The patient has no symptoms"],
+        "answer": "Dyspnea occurs with activity",
+        "tip": "Denies means the symptom is not reported; on exertion means during activity."
+      }
+    ],
+    "interview": [
+      {
+        "prompt": "A patient says, ‘My chest started hurting this morning.’ What is the best next OPQRST question?",
+        "options": ["What were you doing when it started?", "What is your favorite food?", "Are you married?", "Can you walk home?"],
+        "answer": "What were you doing when it started?",
+        "tip": "This explores onset and context while staying focused on the chief complaint."
+      },
+      {
+        "prompt": "Which question best explores pain quality?",
+        "options": ["How would you describe the pain?", "Where do you live?", "When did you last eat?", "Do you need a blanket?"],
+        "answer": "How would you describe the pain?",
+        "tip": "Quality describes the character of pain: sharp, dull, burning, pressure-like, etc."
+      }
+    ],
+    "clinical": [
+      {
+        "prompt": "Which sentence is the clearest respiratory assessment documentation?",
+        "options": ["Breathing is bad.", "Bilateral expiratory wheezing noted on auscultation.", "Lungs not normal.", "Patient breathing weird."],
+        "answer": "Bilateral expiratory wheezing noted on auscultation.",
+        "tip": "Document what you observed or measured, not vague impressions."
+      },
+      {
+        "prompt": "A patient is using accessory muscles and speaking in short sentences. Which phrase best communicates the finding?",
+        "options": ["Increased work of breathing", "Normal appetite", "Stable gait", "Intact skin"],
+        "answer": "Increased work of breathing",
+        "tip": "Use concrete findings alongside this phrase whenever possible."
+      }
+    ],
+    "writing": [
+      {
+        "prompt": "Which rewrite is most objective? ‘The wound looks infected.’",
+        "options": ["The wound is horrible.", "Incision with surrounding erythema, warmth and purulent drainage.", "The wound seems bad.", "The wound probably has bacteria."],
+        "answer": "Incision with surrounding erythema, warmth and purulent drainage.",
+        "tip": "Objective documentation records observable findings and avoids unsupported conclusions."
+      },
+      {
+        "prompt": "Choose the preferred charting verb: ‘The patient ___ nausea.’",
+        "options": ["reports", "does", "makes", "tells"],
+        "answer": "reports",
+        "tip": "Reports is concise and commonly used for subjective symptoms."
+      }
+    ],
+    "speaking": [
+      {
+        "prompt": "Which opening is most appropriate for SBAR?",
+        "options": ["I am calling about Mr. Lee because his blood pressure has dropped to 86/54 mmHg.", "Hey, something is wrong.", "This patient is bad.", "I do not know what to do with him."],
+        "answer": "I am calling about Mr. Lee because his blood pressure has dropped to 86/54 mmHg.",
+        "tip": "SBAR begins with a concise statement of the current situation and why you are communicating."
+      }
+    ],
+    "simulation": [
+      {
+        "prompt": "Post-op day 1: patient reports increasing shortness of breath. Which documentation is most useful?",
+        "options": ["Patient looks bad.", "Patient reports new shortness of breath; RR 28/min and SpO₂ 90% on room air.", "Maybe pulmonary problem.", "Patient does not feel good."],
+        "answer": "Patient reports new shortness of breath; RR 28/min and SpO₂ 90% on room air.",
+        "tip": "Use the patient’s report plus objective measurements. Clinical management should follow local policy and qualified assessment."
+      }
+    ]
+  },
+  "reviewWords": [
+    { "term": "dyspnea", "meaning": "difficulty breathing" },
+    { "term": "wheezing", "meaning": "high-pitched musical breath sound" },
+    { "term": "drowsiness", "meaning": "abnormal sleepiness" },
+    { "term": "tenderness", "meaning": "pain on palpation" },
+    { "term": "drainage", "meaning": "fluid leaving a wound or tube" },
+    { "term": "swelling", "meaning": "enlargement of a body part" }
+  ],
+  "speakingPhrases": [
+    "Can you describe the pain for me?",
+    "When did the shortness of breath start?",
+    "The patient is alert and oriented and reports mild incisional pain.",
+    "Bilateral breath sounds are diminished at the bases.",
+    "I am calling because the patient has developed new hypotension."
+  ],
+  "nursingCase": {
+    "title": "Respiratory Assessment",
+    "patient": "67-year-old male admitted with community-acquired pneumonia",
+    "findings": [
+      "Alert and oriented ×4",
+      "BP 128/76 mmHg · HR 88 bpm · RR 20/min",
+      "SpO₂ 94% on 2 L/min via nasal cannula",
+      "Reports dyspnea on exertion and productive cough",
+      "Crackles at the right lung base",
+      "Denies chest pain"
+    ],
+    "model": "Patient alert and oriented ×4. Vital signs stable. SpO₂ 94% on 2 L/min via nasal cannula. Patient reports dyspnea on exertion and productive cough. Crackles noted at the right lung base. Denies chest pain. Patient resting in bed with no signs of acute distress."
+  },
+  "tutorReplies": [
+    {
+      "match": ["dizziness", "lightheaded"],
+      "answer": "Dizziness is a broad term. Lightheadedness usually means feeling faint or as if you might pass out, while vertigo usually describes a spinning sensation. In clinical communication, ask the patient to describe exactly what they feel."
+    },
+    {
+      "match": ["note", "documentation", "chart"],
+      "answer": "For stronger clinical documentation, prioritize objective findings, measurements, patient-reported symptoms, interventions performed, and the patient response. Avoid vague phrases such as ‘looks bad’ when you can describe the actual finding."
+    },
+    {
+      "match": ["sbar"],
+      "answer": "SBAR = Situation, Background, Assessment, Recommendation. Keep the Situation concise, give only relevant background, report current findings in Assessment, and state what you need or recommend according to your role and local policy."
+    },
+    {
+      "match": ["opqrst", "pain"],
+      "answer": "OPQRST helps structure symptom assessment: Onset, Provocation/Palliation, Quality, Region/Radiation, Severity, and Time. The goal is a focused history, not a scripted interrogation."
+    }
+  ]
+}
