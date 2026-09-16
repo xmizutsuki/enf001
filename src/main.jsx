@@ -1,13 +1,17 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './AppV2.jsx';
+import WordLearningLayer from './WordLearningLayer.jsx';
 import './styles.css';
 import './local-first.css';
 import './curriculum.css';
+import './word-learning.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <WordLearningLayer>
+      <App />
+    </WordLearningLayer>
   </React.StrictMode>,
 );
 
