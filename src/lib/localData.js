@@ -6,28 +6,43 @@ const PREFERENCES_KEY = 'clinspeak-preferences-v1';
 
 export const today = () => new Date().toISOString().slice(0, 10);
 
+const LEGACY_LESSON_MAP = {
+  'basics-1': 'a1-foundations-1',
+  'basics-2': 'a2-pain-1',
+  'basics-3': 'a1-vitals-2',
+  'assessment-1': 'a1-patient-2',
+  'assessment-2': 'a2-pain-4',
+  'assessment-3': 'b1-respiratory-3',
+  'assessment-4': 'b1-cardio-3',
+  'documentation-1': 'a2-documentation-1',
+  'documentation-2': 'a2-documentation-4',
+  'documentation-3': 'b1-communication-1',
+  'simulation-1': 'b2-periop-4',
+  'simulation-2': 'b2-acute-1',
+};
+
 export const defaultProgress = {
-  xp: 120,
+  xp: 0,
   streak: 1,
   hearts: 5,
   lastStudyDate: today(),
-  completedLessons: ['basics-1'],
-  wordsMastered: 18,
+  completedLessons: [],
+  wordsMastered: 0,
   skillScores: {
-    vocabulary: 58,
-    reading: 51,
-    listening: 44,
-    speaking: 38,
-    writing: 42,
-    clinical: 46
+    vocabulary: 0,
+    reading: 0,
+    listening: 0,
+    speaking: 0,
+    writing: 0,
+    clinical: 0,
   },
   mistakes: [
     { wrong: 'difficulty to breathe', right: 'difficulty breathing', tag: 'Grammar' },
     { wrong: 'patient refers pain', right: 'patient reports pain', tag: 'Documentation' },
-    { wrong: 'make an examination', right: 'perform an examination', tag: 'Vocabulary' }
+    { wrong: 'make an examination', right: 'perform an examination', tag: 'Vocabulary' },
   ],
   noteHistory: [],
-  reviewState: {}
+  reviewState: {},
 };
 
 export const defaultPreferences = {
@@ -35,17 +50,22 @@ export const defaultPreferences = {
   profession: 'Nurse',
   englishLevel: 'B1',
   dailyGoal: 30,
-  contentVersion: null
+  contentVersion: null,
 };
+
+function migrateLessonIds(items = []) {
+  return [...new Set(items.map((id) => LEGACY_LESSON_MAP[id] || id))];
+}
 
 function mergeProgress(value = {}) {
   return {
     ...defaultProgress,
     ...value,
+    completedLessons: migrateLessonIds(Array.isArray(value.completedLessons) ? value.completedLessons : []),
     skillScores: { ...defaultProgress.skillScores, ...(value.skillScores || {}) },
     mistakes: Array.isArray(value.mistakes) ? value.mistakes : defaultProgress.mistakes,
     noteHistory: Array.isArray(value.noteHistory) ? value.noteHistory : [],
-    reviewState: value.reviewState && typeof value.reviewState === 'object' ? value.reviewState : {}
+    reviewState: value.reviewState && typeof value.reviewState === 'object' ? value.reviewState : {},
   };
 }
 
@@ -55,13 +75,10 @@ function openDatabase() {
       reject(new Error('IndexedDB is not supported in this browser.'));
       return;
     }
-
     const request = indexedDB.open(DB_NAME, DB_VERSION);
     request.onupgradeneeded = () => {
       const db = request.result;
-      if (!db.objectStoreNames.contains(STATE_STORE)) {
-        db.createObjectStore(STATE_STORE);
-      }
+      if (!db.objectStoreNames.contains(STATE_STORE)) db.createObjectStore(STATE_STORE);
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error || new Error('Unable to open local database.'));
@@ -84,22 +101,19 @@ async function writeState(key, value) {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STATE_STORE, 'readwrite');
     tx.objectStore(STATE_STORE).put(value, key);
-    tx.oncomplete = () => {
-      db.close();
-      resolve();
-    };
-    tx.onerror = () => {
-      db.close();
-      reject(tx.error);
-    };
+    tx.oncomplete = () => { db.close(); resolve(); };
+    tx.onerror = () => { db.close(); reject(tx.error); };
   });
 }
 
 export async function loadProgress() {
   try {
     const saved = await readState('progress');
-    if (saved) return mergeProgress(saved);
-
+    if (saved) {
+      const migrated = mergeProgress(saved);
+      await writeState('progress', migrated);
+      return migrated;
+    }
     const legacy = localStorage.getItem(LEGACY_PROGRESS_KEY);
     if (legacy) {
       const migrated = mergeProgress(JSON.parse(legacy));
@@ -107,7 +121,6 @@ export async function loadProgress() {
       localStorage.removeItem(LEGACY_PROGRESS_KEY);
       return migrated;
     }
-
     await writeState('progress', defaultProgress);
     return mergeProgress(defaultProgress);
   } catch (error) {
@@ -155,11 +168,11 @@ export async function createBackup(contentVersion) {
   const preferences = loadPreferences();
   return {
     format: 'clinspeak-backup',
-    schemaVersion: 1,
+    schemaVersion: 2,
     exportedAt: new Date().toISOString(),
     contentVersion,
     progress,
-    preferences
+    preferences,
   };
 }
 
@@ -179,9 +192,7 @@ export function downloadBackup(backup) {
 export async function importBackupFile(file) {
   const raw = await file.text();
   const backup = JSON.parse(raw);
-  if (backup?.format !== 'clinspeak-backup' || !backup.progress) {
-    throw new Error('This file is not a valid ClinSpeak backup.');
-  }
+  if (backup?.format !== 'clinspeak-backup' || !backup.progress) throw new Error('This file is not a valid ClinSpeak backup.');
   const progress = mergeProgress(backup.progress);
   const preferences = { ...defaultPreferences, ...(backup.preferences || {}) };
   await saveProgress(progress);
