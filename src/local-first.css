@@ -1,0 +1,74 @@
+.app-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #0b3b4a;
+}
+
+.app-loading strong {
+  font-size: 1.45rem;
+}
+
+.app-loading span {
+  color: #6b7b80;
+  font-size: 0.92rem;
+}
+
+.local-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.local-settings-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #40555c;
+}
+
+.local-settings-grid input,
+.local-settings-grid select {
+  width: 100%;
+  border: 1px solid #d9e2e4;
+  border-radius: 12px;
+  padding: 11px 12px;
+  background: #fff;
+  color: #173b45;
+  font: inherit;
+  outline: none;
+}
+
+.local-settings-grid input:focus,
+.local-settings-grid select:focus {
+  border-color: #2c8f78;
+  box-shadow: 0 0 0 3px rgba(44, 143, 120, 0.12);
+}
+
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 8px;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .local-settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .backup-actions > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
