@@ -1,0 +1,18 @@
+{
+  "name": "ClinSpeak — Medical English",
+  "short_name": "ClinSpeak",
+  "description": "Clinical English training for healthcare professionals.",
+  "start_url": "/enf001/",
+  "scope": "/enf001/",
+  "display": "standalone",
+  "background_color": "#f4f8f7",
+  "theme_color": "#0b3b4a",
+  "icons": [
+    {
+      "src": "/enf001/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
